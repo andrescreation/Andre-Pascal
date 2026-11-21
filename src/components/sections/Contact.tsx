@@ -77,6 +77,13 @@ export function Contact({ standalone = false }: { standalone?: boolean }) {
     };
   }, [fullHeading, standalone]);
 
+  const firstLineFull = "LET'S BUILD";
+  const firstLineText = fullHeading.slice(0, Math.min(typedLength, firstLineFull.length));
+  const secondLineText =
+    typedLength > firstLineFull.length + 1
+      ? fullHeading.slice(firstLineFull.length + 1, typedLength)
+      : "";
+
   const platforms: Array<{ name: string; href: string; icon: IconName; external?: boolean }> = [
     { name: "WhatsApp", href: site.whatsappUrl, icon: "whatsapp", external: true },
     { name: "Email", href: `mailto:${site.email}`, icon: "mail", external: false },
@@ -104,7 +111,14 @@ export function Contact({ standalone = false }: { standalone?: boolean }) {
           aria-label={fullHeading}
           className="mt-6 min-h-[1.8em] font-display font-black uppercase leading-[0.9] tracking-[-0.02em] text-[clamp(2.25rem,7.5vw,7rem)] md:text-[clamp(2.5rem,7.5vw,7rem)] text-[var(--ink)]"
         >
-          {fullHeading.slice(0, typedLength)}
+          <span data-testid="contact-heading-line-1" className="block">
+            {firstLineText}
+          </span>
+          {secondLineText.length > 0 && (
+            <span data-testid="contact-heading-line-2" className="block">
+              {secondLineText}
+            </span>
+          )}
         </h2>
 
         <div
