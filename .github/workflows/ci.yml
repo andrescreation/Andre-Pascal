@@ -1,0 +1,82 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+      - andre
+  pull_request:
+    branches:
+      - main
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  quality-and-tests:
+    name: Quality & Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "yarn"
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Lint and Format Check
+        run: npm run lint
+
+      - name: TypeScript Typecheck
+        run: npm run typecheck
+
+      - name: Content and Icon Rules Lint
+        run: npm run content:lint
+
+      - name: Unit Tests
+        run: npm run test:unit
+
+      - name: Image Budget Check
+        run: npm run img:strict
+
+      - name: Production Build
+        run: npm run build
+
+      - name: Playwright E2E Tests
+        run: npm run test:e2e
+
+      - name: Axe Accessibility Tests
+        run: npm run test:a11y
+
+      - name: Lighthouse CI
+        run: npm run test:lh
+
+      - name: Upload Playwright Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 14
+
+      - name: Upload Lighthouse Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-results
+          path: .lighthouseci/
+          retention-days: 14
