@@ -20,13 +20,12 @@ export function Contact({ standalone = false }: { standalone?: boolean }) {
       return;
     }
 
-    setTypedLength(0);
-    setTypingDone(false);
-
     let cancelled = false;
     let revertFn: (() => void) | undefined;
 
     async function initScrollTyping() {
+      setTypedLength(0);
+      setTypingDone(false);
       const [{ default: gsap }, { ScrollTrigger }] = await Promise.all([
         import("gsap"),
         import("gsap/ScrollTrigger"),
@@ -64,10 +63,16 @@ export function Contact({ standalone = false }: { standalone?: boolean }) {
       revertFn = () => trigger.kill();
     }
 
-    initScrollTyping();
+    const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
+    if (isDesktop) {
+      initScrollTyping();
+    } else {
+      window.addEventListener("scroll", initScrollTyping, { once: true, passive: true });
+    }
 
     return () => {
       cancelled = true;
+      window.removeEventListener("scroll", initScrollTyping);
       revertFn?.();
     };
   }, [fullHeading, standalone]);

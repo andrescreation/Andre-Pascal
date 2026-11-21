@@ -80,10 +80,16 @@ export function Experience({
       });
     }
 
-    initMotion();
+    const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
+    if (isDesktop) {
+      initMotion();
+    } else {
+      window.addEventListener("scroll", initMotion, { once: true, passive: true });
+    }
 
     return () => {
       cancelled = true;
+      window.removeEventListener("scroll", initMotion);
       revertFn?.();
     };
   }, [standalone]);

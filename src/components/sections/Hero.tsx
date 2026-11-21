@@ -17,6 +17,8 @@ export function Hero({ hasHeroVideo = false }: { hasHeroVideo?: boolean }) {
           alt={heroContent.posterAlt}
           width={1600}
           height={900}
+          loading="eager"
+          decoding="sync"
           fetchPriority="high"
           className="h-full w-full object-cover"
         />

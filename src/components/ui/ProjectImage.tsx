@@ -30,7 +30,7 @@ export function ProjectImage({
       width={width}
       height={height}
       loading={priority ? "eager" : "lazy"}
-      decoding="async"
+      decoding={priority ? "sync" : "async"}
       fetchPriority={priority ? "high" : "auto"}
       style={
         blur
