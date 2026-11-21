@@ -1,0 +1,6 @@
+# Owner lock for governance, security, and CI/script files
+/mandatory.md @andrescreation1
+/.agents/ @andrescreation1
+/.github/ @andrescreation1
+/scripts/ @andrescreation1
+/.safe-install-allowlist @andrescreation1

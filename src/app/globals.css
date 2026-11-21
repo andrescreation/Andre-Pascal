@@ -1,0 +1,201 @@
+@import "tailwindcss";
+
+:root {
+  --paper: #f2f1ee;
+  --ink: #111111;
+  --ink-muted: #5a5a57;
+  --rule: #d9d7d2;
+  --tag-bg: #111111;
+  --tag-fg: #ffffff;
+  --accent: #0267c1;
+}
+
+html.dark {
+  --paper: #0f0f0f;
+  --ink: #f2f1ee;
+  --ink-muted: #a3a39e;
+  --rule: #2a2a2a;
+  --tag-bg: #f2f1ee;
+  --tag-fg: #111111;
+  --accent: #0a9aed;
+}
+
+@layer base {
+  html {
+    background-color: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body), sans-serif;
+    scroll-behavior: auto;
+    overflow-x: clip;
+  }
+
+  body {
+    background-color: var(--paper);
+    color: var(--ink);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+}
+
+.font-display {
+  font-family: var(--font-display), var(--font-body), sans-serif;
+}
+
+.font-mono-meta {
+  font-family: var(--font-mono), monospace;
+}
+
+.display-hero {
+  font-family: var(--font-display), var(--font-body), sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  line-height: 0.85;
+  letter-spacing: -0.03em;
+  font-size: clamp(3.5rem, 19vw, 13rem);
+}
+
+@media (min-width: 768px) {
+  .display-hero {
+    font-size: clamp(5rem, 13vw, 13rem);
+  }
+}
+
+.display-xl {
+  font-family: var(--font-display), var(--font-body), sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  line-height: 0.9;
+  letter-spacing: -0.025em;
+  font-size: clamp(2.25rem, 11vw, 4.5rem);
+  overflow-wrap: break-word;
+}
+
+@media (min-width: 768px) {
+  .display-xl {
+    line-height: 0.85;
+    letter-spacing: -0.03em;
+    font-size: clamp(5rem, 13vw, 13rem);
+  }
+}
+
+.display-l {
+  font-family: var(--font-display), var(--font-body), sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  font-size: clamp(2rem, 7vw, 7.5rem);
+  overflow-wrap: break-word;
+}
+
+@media (min-width: 768px) {
+  .display-l {
+    font-size: clamp(2.25rem, 7vw, 7.5rem);
+  }
+}
+
+.heading-m {
+  font-family: var(--font-display), var(--font-body), sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 1.15;
+}
+
+.container-editorial {
+  width: 100%;
+  max-width: 1440px;
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 4vw, 3.5rem);
+}
+
+.section-pad {
+  padding-block: clamp(5rem, 10vw, 9rem);
+}
+
+.editorial-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+  transition:
+    color 200ms ease,
+    text-decoration-color 200ms ease;
+}
+
+.editorial-link:hover {
+  color: var(--accent);
+  text-decoration-color: var(--accent);
+}
+
+/* Marquee animations */
+@keyframes marquee-left {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes marquee-right {
+  0% {
+    transform: translate3d(-50%, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.marquee-track-left {
+  animation: marquee-left 45s linear infinite;
+}
+
+.marquee-track-right {
+  animation: marquee-right 50s linear infinite;
+}
+
+.marquee-container:hover .marquee-track-left,
+.marquee-container:hover .marquee-track-right,
+.marquee-container:focus-within .marquee-track-left,
+.marquee-container:focus-within .marquee-track-right {
+  animation-play-state: paused;
+}
+
+.marquee-mask {
+  mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+}
+
+@keyframes scroll-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+.animate-scroll-bob {
+  animation: scroll-bob 2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
