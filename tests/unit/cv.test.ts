@@ -8,7 +8,9 @@ describe("CV PDFs", () => {
     for (const cv of site.cvOptions) {
       const filePath = path.join(process.cwd(), "public", cv.href);
       expect(fs.existsSync(filePath), `Missing ${filePath}`).toBe(true);
-      const mb = fs.statSync(filePath).size / (1024 * 1024);
+      const size = fs.statSync(filePath).size;
+      expect(size).toBeGreaterThan(10_000);
+      const mb = size / (1024 * 1024);
       expect(mb).toBeLessThanOrEqual(2);
     }
   });

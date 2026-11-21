@@ -109,6 +109,7 @@ export function MobileMenu({ open, onClose, triggerRef }: MobileMenuProps) {
             <a
               key={cv.href}
               href={cv.href}
+              download
               target="_blank"
               rel="noopener noreferrer"
               onClick={onClose}

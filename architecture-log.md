@@ -67,3 +67,6 @@
 
 ## Custom Favicon Update (2026-11-21)
 - Copied `docs/reference/favicon.svg` to `public/brand/favicon.svg` and `public/favicon.svg` and updated `metadata.icons` in `src/app/layout.tsx` to reference `/brand/favicon.svg`.
+
+## Real CV PDFs & Download Attribute Update (2026-11-21)
+- Replaced placeholder PDFs in `public/cv/` with the real CV PDFs from `docs/reference/` (`andre-pascal-web-product-designer-cv.pdf` and `andre-pascal-brand-visual-designer-cv.pdf`), added the `download` attribute to CV links in `CvMenu.tsx` and `MobileMenu.tsx`, and tightened `tests/unit/cv.test.ts` to assert each PDF is larger than 10 KB.

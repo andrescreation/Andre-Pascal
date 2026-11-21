@@ -95,6 +95,7 @@ export function CvMenu({ variant = "navbar", inverted = false }: CvMenuProps) {
             <a
               key={cv.href}
               href={cv.href}
+              download
               role="menuitem"
               target="_blank"
               rel="noopener noreferrer"
