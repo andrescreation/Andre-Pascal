@@ -64,3 +64,6 @@
 - Replaced `console.log` with `process.stdout.write` in `scripts/*.mjs` for SupaGuard pre-commit compliance.
 - Configured `origin` remote to `https://github.com/andrescreation/Andre-Pascal.git`.
 - Created a cryptographically signed initial commit on the `andre` branch and pushed via `/home/andre/.local/bin/git-push-guard`.
+
+## Custom Favicon Update (2026-11-21)
+- Copied `docs/reference/favicon.svg` to `public/brand/favicon.svg` and `public/favicon.svg` and updated `metadata.icons` in `src/app/layout.tsx` to reference `/brand/favicon.svg`.
