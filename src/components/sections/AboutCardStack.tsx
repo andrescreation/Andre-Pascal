@@ -63,7 +63,7 @@ export function AboutCardStack({
             className="flex snap-x snap-mandatory overflow-x-auto scroll-smooth"
             style={{ scrollbarWidth: "none" }}
           >
-            {cards.map((card, i) => (
+            {cards.map((card) => (
               <div
                 key={card.imageBase}
                 className="w-full shrink-0 snap-center aspect-[4/5] bg-[var(--rule)]"
@@ -74,7 +74,6 @@ export function AboutCardStack({
                   sizes="(max-width: 1023px) 92vw, 40vw"
                   width={800}
                   height={1000}
-                  priority={i === 0}
                 />
               </div>
             ))}
@@ -157,7 +156,6 @@ export function AboutCardStack({
                   sizes="(max-width: 1023px) 92vw, 40vw"
                   width={800}
                   height={1000}
-                  priority={i === 0}
                 />
               </div>
             ))}

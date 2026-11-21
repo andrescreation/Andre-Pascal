@@ -16,6 +16,8 @@ export function Footer() {
                 alt={site.siteName}
                 width={132}
                 height={32}
+                loading="lazy"
+                decoding="async"
                 className="h-7 w-auto"
               />
             </Link>

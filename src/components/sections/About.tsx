@@ -37,17 +37,7 @@ export function About() {
     let revertFn: (() => void) | undefined;
 
     if (isMobileOrReduced) {
-      Promise.all([import("gsap"), import("gsap/ScrollTrigger")]).then(
-        ([{ default: gsap }, { ScrollTrigger }]) => {
-          if (cancelled) return;
-          gsap.registerPlugin(ScrollTrigger);
-          ScrollTrigger.sort();
-          ScrollTrigger.refresh();
-        },
-      );
-      return () => {
-        cancelled = true;
-      };
+      return;
     }
 
     async function initMotion() {
@@ -279,7 +269,7 @@ export function About() {
                 href="/about"
                 className="group inline-flex min-h-[44px] items-center gap-1.5 whitespace-nowrap text-sm font-medium text-[var(--ink)] transition-colors hover:text-[var(--accent)]"
               >
-                <span>Read more</span>
+                <span>Read full story</span>
                 <Icon
                   name="arrow-up-right"
                   size={16}

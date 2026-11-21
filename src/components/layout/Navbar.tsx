@@ -97,6 +97,7 @@ export function Navbar() {
               alt={site.siteName}
               width={132}
               height={32}
+              decoding="async"
               className="h-7 w-auto"
             />
           </Link>

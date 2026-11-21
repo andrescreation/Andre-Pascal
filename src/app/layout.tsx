@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Archivo, Inter_Tight, JetBrains_Mono } from "next/font/google";
 import type { ReactNode } from "react";
 import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
@@ -7,28 +6,6 @@ import { ThemeProvider } from "@/components/layout/ThemeProvider";
 import { SmoothScroll } from "@/components/motion/SmoothScroll";
 import { site } from "@/content/site";
 import "./globals.css";
-
-const archivo = Archivo({
-  subsets: ["latin"],
-  variable: "--font-display",
-  display: "swap",
-});
-
-const interTight = Inter_Tight({
-  subsets: ["latin"],
-  weight: ["400", "500", "700"],
-  variable: "--font-body",
-  display: "swap",
-  preload: false,
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500"],
-  variable: "--font-mono",
-  display: "swap",
-  preload: false,
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.siteUrl),
@@ -70,11 +47,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html
-      lang="en"
-      suppressHydrationWarning
-      className={`${archivo.variable} ${interTight.variable} ${jetbrainsMono.variable}`}
-    >
+    <html lang="en" suppressHydrationWarning>
       <body id="top" className="min-h-screen flex flex-col">
         <ThemeProvider>
           <SmoothScroll />
