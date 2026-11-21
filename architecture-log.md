@@ -70,3 +70,9 @@
 
 ## Real CV PDFs & Download Attribute Update (2026-11-21)
 - Replaced placeholder PDFs in `public/cv/` with the real CV PDFs from `docs/reference/` (`andre-pascal-web-product-designer-cv.pdf` and `andre-pascal-brand-visual-designer-cv.pdf`), added the `download` attribute to CV links in `CvMenu.tsx` and `MobileMenu.tsx`, and tightened `tests/unit/cv.test.ts` to assert each PDF is larger than 10 KB.
+
+## CI/CD Pipeline, Vercel Configuration & `andre` -> `main` PR Workflow (2026-11-21)
+- Added `.github/workflows/ci.yml` to run lint, typecheck, content:lint, unit tests, strict image budget checks, production build, Playwright E2E, Axe accessibility, and Lighthouse CI on pushes to `andre`/`main` and PRs targeting `main` (using `yarn install --frozen-lockfile`).
+- Added `vercel.json` locking Framework Preset (`nextjs`), `yarn install --frozen-lockfile`, `npm run build`, and Git deployment enablement for `main` (Production) and `andre` (Preview).
+- Documented the `andre` -> PR -> `main` release workflow in `README.md`.
+- Initialized the remote `main` branch on `origin`, pushed the new CI/Vercel configuration to `origin/andre`, set `main` as the default target branch, and configured the `andre` -> `main` Pull Request.

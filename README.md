@@ -25,3 +25,9 @@ Target under 5 MB, no audio.
 - `npm run img`: optimize images from `images-raw/` into `public/images/`
 - `npm run content:lint`: verify writing and icon rules
 - `npm run test:all`: lint, typecheck, content lint, unit tests, build, Playwright E2E, axe accessibility, and Lighthouse CI
+
+## Deployment workflow (andre -> PR -> main)
+
+- All day-to-day commits and agent pushes target the `andre` branch, which triggers GitHub Actions CI (`Quality & Tests`) and builds a Vercel Preview deployment.
+- Opening a Pull Request from `andre` into `main` runs the `Quality & Tests` CI workflow and attaches the Vercel Preview URL for final review.
+- Merging the Pull Request into `main` triggers the Vercel Production deployment to `https://andrescreation.vercel.app`.
