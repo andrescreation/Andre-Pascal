@@ -1,9 +1,9 @@
 {
-  "/images/about/01-portrait": "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAADQAgCdASoQABQAPu1iqU2ppaOiMAgBMB2JaQAAfKAAAP7uG9TCsunwK+9DgAAA",
-  "/images/about/02-brand": "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAADQAgCdASoQABQAPu1iqU2ppaQiMAgBMB2JaQAAfKAAAP7uhRJZCrq+eH3iUgAA",
-  "/images/about/03-system": "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAADQAgCdASoQABQAPu1kqU2ppaOiMAgBMB2JaQAAfKAAAP7uhRJZCrq+eH3uuyAA",
-  "/images/about/04-build": "data:image/webp;base64,UklGRjgAAABXRUJQVlA4ICwAAAAwAwCdASoQABQAPu1iqU2tJaOiMAgBoB2JaQAAewdW6Y3gAP7utq7XawgAAA==",
-  "/images/about/05-live": "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAADwAgCdASoQABQAPu1iqU2ppaQiMAgBMB2JaQDLLC2xAAD+7oUR0F/EDMjmUAAA",
+  "/images/about/01-portrait": "data:image/webp;base64,UklGRqgAAABXRUJQVlA4IJwAAADQAwCdASoQABQAPu1iqU2ppaOiMAgBMB2JYwC2yBnyQ3arNMpkLgAA/uft/nZy7IvTSWOEb7LbpIspH3E+Cfe5bLj+YAlBSiLjXn09vhWQhiLJMuuNVLKNfdGz0aal0Ly6PE7lme0olA3kZMwVlHI9O7eekba/Q4LOX6ZkQeYeNCzj3hn33gPxroe0TgE8HtvPcIhtJRGpwo/gAAA=",
+  "/images/about/02-brand": "data:image/webp;base64,UklGRpIAAABXRUJQVlA4IIYAAABwBACdASoQABQAPu1iqU2ppaOiMAgBMB2JYwC7AdwA9jLC89CAkoZGaCJyAAD+jyp/ja7rBQgCMwaWysKVNX7ZjpTnrwdSMNkW8O55fIUUc85KlXY2LWDAkXAwsxQhEwhY9QikgmaScHMVdvc5seTt6FJBW16POwecLkFngGIFGUYOGEAAAA==",
+  "/images/about/03-system": "data:image/webp;base64,UklGRqoAAABXRUJQVlA4IJ4AAAAQBACdASoQABQAPu1iqU2ppaOiMAgBMB2JZwATgAE1DF8egH/z2pvdgAD+6ydcvsBuSKctN8Xh4DMXRmrtbUapladajsHWkGQug3ET12Rf4PQFX9hXShMjbmA84PYTBLpQg5HgK8A0x5hgtMqgnCsGAGf1lifTC/ymsyVOGrUNQPCBX3s2gN5dZnNnyWgE6gLerpQq0V+g+MrnV6IAAA==",
+  "/images/about/04-build": "data:image/webp;base64,UklGRrAAAABXRUJQVlA4IKQAAADwAwCdASoQABQAPu1iqU2ppaOiMAgBMB2JQBOgMX6Px5DzlOGkpDWAAOIfkrJzbbUdn6bPmAK3ceNdgXI7gPxyy7RjzJbYt71j11OGYVcQdmDfdQpO2URgeAf19tuumqVQZOXi1aB84PLdb8yqPGxlUdrBUrZYkOrZyIm+3AhlhM2j7oTuI9v/cCzWW9GJEK7emwNnBw7Bu587BMg+fmsyvOAAAA==",
+  "/images/about/05-live": "data:image/webp;base64,UklGRqoAAABXRUJQVlA4IJ4AAAAwBACdASoQABQAPu1iqU2ppaOiMAgBMB2JYwCdMoM8qDJk/YdSwUTxHeAA/luOdUWmoU9PZYZ6KfLipAqkQ/Lks1MR7LT9WXmwTIykHeMFVFiVnTApLcNAz7Et1ARtIuw22Ex9Z3Kpstr87NiR/ws9pa+Q2AZ7v8icY01cOBYkjbwz0QHNhY83xSEeyf+Bf/EeqayBAcXeMAEiyiUAAA==",
   "/images/projects/amyola/cover": "data:image/webp;base64,UklGRioAAABXRUJQVlA4IB4AAAAwAQCdASoQAAwAA4BaJZwAA3AA/vB1b/iOgg7hAAA=",
   "/images/projects/andre-creations-portfolio/cover": "data:image/webp;base64,UklGRiwAAABXRUJQVlA4ICAAAAAwAQCdASoQAAwAA4BaJZwAA3AA/vB1cbboLxgscAQAAA==",
   "/images/projects/apus-industries/cover": "data:image/webp;base64,UklGRiwAAABXRUJQVlA4ICAAAAAwAQCdASoQAAwAA4BaJZwAA3AA/vB1b/jbTpFFRCAAAA==",
@@ -25,6 +25,8 @@
   "/images/projects/supashop/checkout": "data:image/webp;base64,UklGRiwAAABXRUJQVlA4ICAAAAAwAQCdASoQAAwAA4BaJZwAA3AA/vB1b/jbTpFFRCAAAA==",
   "/images/projects/supashop/cover": "data:image/webp;base64,UklGRioAAABXRUJQVlA4IB4AAAAwAQCdASoQAAwAA4BaJZwAA3AA/vB1b/iOpTJECAA=",
   "/images/projects/trenztech/cover": "data:image/webp;base64,UklGRioAAABXRUJQVlA4IB4AAAAwAQCdASoQAAwAA4BaJZwAA3AA/vB1b/iOpTJECAA=",
-  "/images/skills/workspace": "data:image/webp;base64,UklGRjwAAABXRUJQVlA4IDAAAADQAgCdASoQABQAPu1iqU2ppaQiMAgBMB2JaQAAfUWAAP7uhRJclMmdGi4mVpyAAAA=",
-  "/images/about/06-shipping": "data:image/webp;base64,UklGRjwAAABXRUJQVlA4IDAAAADQAgCdASoQABQAPu1kqU2ppaOiMAgBMB2JaQAAfKAAAP7uhRJckVFIhWOe9QCAAAA="
+  "/images/skills/workspace": "data:image/webp;base64,UklGRqYAAABXRUJQVlA4IJoAAABQBACdASoQABQAPu1iqU2ppaOiMAgBMB2JQBOmUAS1IsksYEoeFbXDqc4AAPn2MaMFdX+za52hlfsB6m6X9tZbYvPyuJ593hNBM0vt+ZeoJPgnb9VXmZ7rToEmqA3k5LKLrgsRLhuaPZRAkLv0Q+/qlcm8RV6rUC5wrjS37sQxke4/SppNSe/Aa7JVX/qnWezNX0x75sNAkAAA",
+  "/images/about/06-shipping": "data:image/webp;base64,UklGRqAAAABXRUJQVlA4IJQAAAAQBACdASoQABQAPu1iqU2ppaOiMAgBMB2JYgCdABnuQTP/ZgNwpzIUAAD+x3VXYU6g5E0mBoQIm0amD3N+mFCmaWJy7SmsqW5KuxThcuJwCwX3FJ9BkFg1jhFNIAkleY9+s6LLFRmd5PaAW1sIeM6r8aj1ODnS4hmHYP3qvnapL86zJ07gG/6ZoZTr7rjf0KpEgAAA",
+  "/images/hero-poster": "data:image/webp;base64,UklGRk4AAABXRUJQVlA4IEIAAADQAQCdASoQAAkAA4BaJQBOgBhzpQ1CoAD+70c4hRf+6i4pAga53AVFSz94UodO0Zz3F/J+MQTL0l8l1LKczc9AAAA=",
+  "/images/about/06-learning-shipping": "data:image/webp;base64,UklGRqAAAABXRUJQVlA4IJQAAAAQBACdASoQABQAPu1iqU2ppaOiMAgBMB2JYgCdABnuQTP/ZgNwpzIUAAD+x3VXYU6g5E0mBoQIm0amD3N+mFCmaWJy7SmsqW5KuxThcuJwCwX3FJ9BkFg1jhFNIAkleY9+s6LLFRmd5PaAW1sIeM6r8aj1ODnS4hmHYP3qvnapL86zJ07gG/6ZoZTr7rjf0KpEgAAA"
 }

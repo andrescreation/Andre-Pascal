@@ -42,9 +42,10 @@ test.describe("contact", () => {
   test("renders home contact heading split across two lines after scrolling", async ({ page }) => {
     await page.goto("/");
     await page.evaluate(() => window.scrollTo(0, 200));
-    await page.waitForTimeout(300);
+    await page.waitForTimeout(400);
     await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
-    await page.waitForTimeout(500);
+    await page.waitForTimeout(400);
+    await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
 
     const section = page.getByTestId("contact-section");
     const line1 = section.getByTestId("contact-heading-line-1");

@@ -71,6 +71,7 @@ export const skillsContent = SkillsSchema.parse({
     "Slack",
   ],
   imageBase: "/images/skills/workspace",
-  imageAlt: "Andre Pascal at his workspace with sketches and a laptop",
+  imageAlt:
+    "Andre Pascal standing at his wooden studio desk reviewing a dark-mode analytics dashboard on a laptop beside printed brand style sheets",
   dateTag: "2020 to now",
 });

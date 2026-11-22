@@ -24,8 +24,6 @@ export function Contact({ standalone = false }: { standalone?: boolean }) {
     let revertFn: (() => void) | undefined;
 
     async function initScrollTyping() {
-      setTypedLength(0);
-      setTypingDone(false);
       const [{ default: gsap }, { ScrollTrigger }] = await Promise.all([
         import("gsap"),
         import("gsap/ScrollTrigger"),
@@ -33,6 +31,12 @@ export function Contact({ standalone = false }: { standalone?: boolean }) {
       if (cancelled || !sectionRef.current) return;
 
       gsap.registerPlugin(ScrollTrigger);
+      const syncProgress = (self: { progress: number }) => {
+        const next = Math.round(self.progress * fullHeading.length);
+        setTypedLength(next);
+        setTypingDone(self.progress >= 0.75);
+      };
+
       const trigger = ScrollTrigger.create({
         trigger: sectionRef.current,
         start: "top 90%",
@@ -52,14 +56,12 @@ export function Contact({ standalone = false }: { standalone?: boolean }) {
         scrub: 0.25,
         invalidateOnRefresh: true,
         refreshPriority: -3,
-        onUpdate: (self) => {
-          const next = Math.round(self.progress * fullHeading.length);
-          setTypedLength(next);
-          setTypingDone(self.progress >= 0.75);
-        },
+        onUpdate: syncProgress,
+        onRefresh: syncProgress,
       });
       ScrollTrigger.sort();
       ScrollTrigger.refresh();
+      syncProgress(trigger);
       revertFn = () => trigger.kill();
     }
 

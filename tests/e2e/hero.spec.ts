@@ -15,7 +15,7 @@ test.describe("hero", () => {
     await expect(hero.getByRole("button", { name: heroContent.secondaryCta.label })).toBeVisible();
   });
 
-  test("desktop has muted playsinline video with poster; mobile/reduced has poster only", async ({
+  test("vertical phones and reduced-motion show poster only; landscape mobile, tablets/iPads, and desktop show video", async ({
     page,
   }, testInfo) => {
     await page.goto("/");
@@ -37,6 +37,20 @@ test.describe("hero", () => {
       await expect(video).toHaveAttribute("poster", heroContent.poster);
       const isMuted = await video.evaluate((el: HTMLVideoElement) => el.muted);
       expect(isMuted).toBe(true);
+    }
+
+    if (hasHeroVideo && testInfo.project.name === "chromium-mobile") {
+      // Rotate mobile phone to landscape (844x390) -> video should appear
+      await page.setViewportSize({ width: 844, height: 390 });
+      await expect(video).toHaveCount(1);
+
+      // Rotate back to vertical phone (390x844) -> video should be removed
+      await page.setViewportSize({ width: 390, height: 844 });
+      await expect(video).toHaveCount(0);
+
+      // Resize to iPad / tablet portrait (768x1024) -> video should appear
+      await page.setViewportSize({ width: 768, height: 1024 });
+      await expect(video).toHaveCount(1);
     }
   });
 

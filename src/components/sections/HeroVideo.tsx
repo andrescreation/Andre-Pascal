@@ -6,14 +6,29 @@ export function HeroVideo({ videoSrc, posterSrc }: { videoSrc: string; posterSrc
   const [showVideo, setShowVideo] = useState(false);
 
   useEffect(() => {
-    const isWide = window.matchMedia("(min-width: 768px)").matches;
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const conn = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
-    const saveData = Boolean(conn?.saveData);
+    const verticalPhoneQuery = window.matchMedia("(max-width: 599px) and (orientation: portrait)");
+    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-    if (isWide && !reducedMotion && !saveData) {
-      setShowVideo(true);
-    }
+    const evaluate = () => {
+      const conn = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
+      const saveData = Boolean(conn?.saveData);
+      const isVerticalPhone = verticalPhoneQuery.matches;
+      setShowVideo(!isVerticalPhone && !motionQuery.matches && !saveData);
+    };
+
+    evaluate();
+
+    verticalPhoneQuery.addEventListener("change", evaluate);
+    motionQuery.addEventListener("change", evaluate);
+    window.addEventListener("resize", evaluate, { passive: true });
+    window.addEventListener("orientationchange", evaluate, { passive: true });
+
+    return () => {
+      verticalPhoneQuery.removeEventListener("change", evaluate);
+      motionQuery.removeEventListener("change", evaluate);
+      window.removeEventListener("resize", evaluate);
+      window.removeEventListener("orientationchange", evaluate);
+    };
   }, []);
 
   if (!showVideo) return null;

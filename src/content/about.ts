@@ -20,35 +20,34 @@ export const aboutContent = AboutSchema.parse({
   dateTag: "Since 2020",
   cards: [
     {
-      // TODO: [ANDRE: portrait photo]
       imageBase: "/images/about/01-portrait",
       caption: "That's me. Ibadan, Nigeria.",
-      alt: "That's me. Ibadan, Nigeria. Portrait of Andre Pascal in natural light.",
+      alt: "That's me. Ibadan, Nigeria. Portrait of Andre Pascal wearing glasses in a sunlit room beside a tall window.",
     },
     {
       imageBase: "/images/about/02-brand",
       caption: "Every project starts with the brand.",
-      alt: "Every project starts with the brand. Sketchbook and brand moodboard spread.",
+      alt: "Every project starts with the brand. Andre Pascal sketching geometric monogram letterforms in a notebook beside a color swatch fan.",
     },
     {
       imageBase: "/images/about/03-system",
       caption: "Then I turn it into a system.",
-      alt: "Then I turn it into a system. Close up of a design system and UI components.",
+      alt: "Then I turn it into a system. Laptop on a wooden desk displaying a Figma design system with grid rules, typography scales and UI components.",
     },
     {
       imageBase: "/images/about/04-build",
       caption: "Then I build it.",
-      alt: "Then I build it. Screen with code next to the matching interface design.",
+      alt: "Then I build it. Responsive web wireframe layouts open side by side on a laptop and smartphone.",
     },
     {
       imageBase: "/images/about/05-live",
       caption: "And ship it.",
-      alt: "And ship it. A live website displayed on a phone and laptop.",
+      alt: "And ship it. Andre Pascal smiling beside a sunlit studio window while holding a laptop displaying a live web product interface.",
     },
   ],
   extraCard: {
-    imageBase: "/images/about/06-shipping",
-    caption: "Always learning, always shipping.",
-    alt: "Always learning, always shipping. Design and code iteration in progress.",
+    imageBase: "/images/about/06-learning-shipping",
+    caption: "Always Learning, Always Shipping",
+    alt: "Always Learning, Always Shipping. Andre Pascal reading an open design book at his wooden studio desk beside a laptop displaying an editorial web layout.",
   },
 });
