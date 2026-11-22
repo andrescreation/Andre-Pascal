@@ -86,6 +86,15 @@ async function run() {
       .webp({ quality: 75, effort: 6, smartSubsample: true })
       .toFile(fullPath);
 
+    if (!parsed.dir && baseName === "hero-poster") {
+      const heroPosterPath = path.join(OUT_DIR, "hero-poster.webp");
+      await baseSharp
+        .clone()
+        .resize({ width: 1600, withoutEnlargement: true })
+        .webp({ quality: 75, effort: 6, smartSubsample: true })
+        .toFile(heroPosterPath);
+    }
+
     const blurBuf = await baseSharp
       .clone()
       .resize({ width: 16, withoutEnlargement: true })

@@ -9,8 +9,8 @@ export const heroContent = HeroSchema.parse({
   primaryCta: { label: "View my work", href: "/#work" },
   secondaryCta: { label: "Download CV" },
   scrollHint: "Scroll",
-  // TODO: [ANDRE: hero video + poster]
   poster: "/images/hero-poster.webp",
-  posterAlt: "Andre Pascal working at his desk",
+  posterAlt:
+    "Andre Pascal working on a laptop at a wooden studio desk with an open notebook, ceramic mug and indoor plants",
   video: "/video/hero.mp4",
 });

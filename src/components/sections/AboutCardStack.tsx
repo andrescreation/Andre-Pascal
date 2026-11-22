@@ -1,9 +1,10 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ProjectImage } from "@/components/ui/ProjectImage";
 import { Tag } from "@/components/ui/Tag";
 import type { AboutSchema } from "@/content/schema";
+import { getBlurDataUrl } from "@/lib/images";
 import type { z } from "zod";
 
 type CardItem = z.infer<typeof AboutSchema>["cards"][number];
@@ -22,8 +23,17 @@ export function AboutCardStack({
   cardRefs,
 }: AboutCardStackProps) {
   const [mobileIndex, setMobileIndex] = useState(0);
+  const [loadFullImages, setLoadFullImages] = useState(false);
   const trackRef = useRef<HTMLDivElement>(null);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
+
+  useEffect(() => {
+    const onScroll = () => setLoadFullImages(true);
+    window.addEventListener("scroll", onScroll, { once: true, passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, []);
 
   const displayIndex = isMobileOrReduced ? mobileIndex : activeIndex;
   const activeCard = cards[displayIndex] ?? cards[0];
@@ -68,13 +78,25 @@ export function AboutCardStack({
                 key={card.imageBase}
                 className="w-full shrink-0 snap-center aspect-[4/5] bg-[var(--rule)]"
               >
-                <ProjectImage
-                  base={card.imageBase}
-                  alt={card.alt}
-                  sizes="(max-width: 1023px) 92vw, 40vw"
-                  width={800}
-                  height={1000}
-                />
+                {loadFullImages ? (
+                  <ProjectImage
+                    base={card.imageBase}
+                    alt={card.alt}
+                    sizes="(max-width: 1023px) 92vw, 40vw"
+                    width={800}
+                    height={1000}
+                  />
+                ) : (
+                  <img
+                    src={getBlurDataUrl(card.imageBase)}
+                    alt={card.alt}
+                    width={800}
+                    height={1000}
+                    loading="lazy"
+                    decoding="async"
+                    className="h-full w-full object-cover"
+                  />
+                )}
               </div>
             ))}
           </div>

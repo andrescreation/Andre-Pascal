@@ -7,7 +7,10 @@
         "http://localhost:3000/projects",
         "http://localhost:3000/projects/pepsa"
       ],
-      "numberOfRuns": 3
+      "numberOfRuns": 3,
+      "settings": {
+        "chromeFlags": "--no-sandbox"
+      }
     },
     "assert": {
       "assertions": {
