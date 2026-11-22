@@ -80,8 +80,8 @@
 - Split the `Contact.tsx` heading into two explicit block lines (`LET'S BUILD` on line 1 and `SOMETHING` on line 2) across both the homepage `#contact` section and `/contact`, verified by Playwright E2E bounding-box assertions.
 
 ## Real About, Skills & Hero Media Integration (2026-11-22)
-- Moved new raw media from `docs/reference/` into `images-raw/about/` (`01-portrait.png`, `02-brand.png`, `03-system.png`, `04-build.png`, `06-learning-shipping.png`) and `images-raw/skills/workspace.png`.
+- Moved new raw media from `docs/reference/` into `images-raw/about/` (`01-portrait.png`, `02-brand.png`, `03-system.png`, `04-build.png`, `05-live.png`, `06-learning-shipping.png`) and `images-raw/skills/workspace.png`.
 - Compressed `docs/reference/hero.mp4` via `ffmpeg` (`-crf 28`, `-preset slow`, `-an`, `-movflags +faststart`) into `public/video/hero.mp4` (`517 KB`, well under the `5 MB` budget) and extracted `images-raw/hero-poster.png`.
 - Updated `scripts/optimize-images.mjs` so `images-raw/hero-poster.*` also writes `public/images/hero-poster.webp` alongside `-card.webp`, `-full.webp`, and `src/content/blur.json`.
-- Updated descriptive `alt` text in `src/content/about.ts` (including `/about` 6th card `Always Learning, Always Shipping` at `/images/about/06-learning-shipping`), `src/content/skills.ts`, and `src/content/hero.ts`.
+- Updated descriptive `alt` text in `src/content/about.ts` (all 5 About story cards plus `/about` 6th card `Always Learning, Always Shipping` at `/images/about/06-learning-shipping`), `src/content/skills.ts`, and `src/content/hero.ts`.
 - Updated `src/components/sections/HeroVideo.tsx` and `tests/e2e/hero.spec.ts` so vertical/portrait phone screens (`< 600px` in portrait orientation) never render the hero video (poster only), while landscape mobile screens, tablets/iPads (portrait and landscape), and desktop/large screens render and play the hero video with live orientation-change listeners.

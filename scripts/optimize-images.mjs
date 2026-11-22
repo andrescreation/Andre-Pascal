@@ -90,8 +90,8 @@ async function run() {
       const heroPosterPath = path.join(OUT_DIR, "hero-poster.webp");
       await baseSharp
         .clone()
-        .resize({ width: 1600, withoutEnlargement: true })
-        .webp({ quality: 75, effort: 6, smartSubsample: true })
+        .resize({ width: 1200, withoutEnlargement: true })
+        .webp({ quality: 60, effort: 6, smartSubsample: true })
         .toFile(heroPosterPath);
     }
 

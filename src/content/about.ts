@@ -42,7 +42,7 @@ export const aboutContent = AboutSchema.parse({
     {
       imageBase: "/images/about/05-live",
       caption: "And ship it.",
-      alt: "And ship it. A live website displayed on a phone and laptop.",
+      alt: "And ship it. Andre Pascal smiling beside a sunlit studio window while holding a laptop displaying a live web product interface.",
     },
   ],
   extraCard: {
