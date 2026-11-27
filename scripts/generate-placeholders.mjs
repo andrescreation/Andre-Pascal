@@ -99,16 +99,16 @@ async function run() {
   );
 
   const projectImages = {
-    pepsa: ["cover", "onboarding", "dashboard", "transactions"],
-    "mysounds-global": ["cover", "onboarding", "storefront"],
-    supashop: ["cover", "catalogue", "checkout"],
-    supadex: ["cover"],
-    "andre-creations-portfolio": ["cover"],
-    supadao: ["cover"],
-    "supacore-design-system": ["cover", "tokens", "components"],
-    "apus-industries": ["cover", "packaging", "social"],
-    amyola: ["cover"],
-    trenztech: ["cover"],
+    pepsa: ["cover", "dashboard"],
+    "mysounds-global": ["cover", "storefront"],
+    supashop: ["cover", "catalogue"],
+    supadex: ["cover", "detail"],
+    "andre-creations-portfolio": ["cover", "detail"],
+    supadao: ["cover", "detail"],
+    "supacore-design-system": ["cover", "components"],
+    "apus-industries": ["cover", "packaging"],
+    amyola: ["cover", "detail"],
+    trenztech: ["cover", "detail"],
   };
 
   for (const [slug, imgs] of Object.entries(projectImages)) {

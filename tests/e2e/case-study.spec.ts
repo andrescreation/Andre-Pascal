@@ -21,10 +21,11 @@ test.describe("case studies", () => {
       expect(coverWidth).toBeGreaterThan(0);
 
       await expect(page.getByRole("link", { name: "All projects" })).toBeVisible();
+      await expect(page.getByTestId("case-study-gallery-item")).toHaveCount(2);
     }
   });
 
-  test("gallery images render side by side above Overview on desktop and swap into 4:3 main banner on click", async ({
+  test("gallery images render side by side above Overview on desktop and switch the 4:3 main banner on click", async ({
     page,
     isMobile,
   }) => {
@@ -55,11 +56,13 @@ test.describe("case studies", () => {
     // Gallery appears above the Overview section
     expect(box0!.y).toBeLessThan(overviewBox!.y);
 
-    // Clicking first gallery card swaps its image into the main 4:3 banner
+    // First thumbnail is the main cover; clicking second thumbnail switches main banner to second image, clicking first switches back
     const mainImg = mainBanner.locator("img");
     await expect(mainImg).toHaveAttribute("src", /\/images\/projects\/supashop\/cover/);
+    await items.nth(1).click();
+    await expect(mainImg).toHaveAttribute("src", /\/images\/projects\/supashop\/catalogue/);
     await items.nth(0).click();
-    await expect(mainImg).toHaveAttribute("src", /\/images\/projects\/supashop\/checkout/);
+    await expect(mainImg).toHaveAttribute("src", /\/images\/projects\/supashop\/cover/);
   });
 
   test("draft project slugs return 404", async ({ page }) => {
