@@ -74,7 +74,7 @@ const rawProjects: Project[] = [
     outcome:
       "The redesigned UI and marketing visuals helped drive about a 40% increase in user engagement.",
     cover: "/images/projects/supashop/cover",
-    gallery: ["/images/projects/supashop/catalogue", "/images/projects/supashop/checkout"],
+    gallery: ["/images/projects/supashop/checkout", "/images/projects/supashop/catalogue"],
     marqueeRow: 1,
     order: 3,
     draft: false,

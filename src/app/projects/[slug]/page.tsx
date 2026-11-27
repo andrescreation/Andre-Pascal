@@ -162,7 +162,37 @@ export default async function ProjectCaseStudyPage({
           </aside>
 
           <div className="lg:col-span-8 space-y-12">
-            <section id="overview" className="space-y-3">
+            {project.gallery.length > 0 && (
+              <div
+                data-testid="case-study-gallery"
+                className={`grid grid-cols-1 gap-6 ${
+                  project.gallery.length === 3 ? "md:grid-cols-3" : "md:grid-cols-2"
+                }`}
+              >
+                {project.gallery.map((imgBase, i) => (
+                  <div
+                    key={imgBase}
+                    data-testid="case-study-gallery-item"
+                    className="aspect-[4/3] w-full overflow-hidden bg-[var(--rule)]"
+                  >
+                    <ProjectImage
+                      base={imgBase}
+                      alt={`${project.title} gallery image ${i + 1}`}
+                      sizes="(max-width: 767px) 92vw, (max-width: 1023px) 45vw, 30vw"
+                      width={800}
+                      height={600}
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
+
+            <section
+              id="overview"
+              className={`space-y-3 scroll-mt-24 ${
+                project.gallery.length > 0 ? "border-t border-[var(--rule)] pt-8" : ""
+              }`}
+            >
               <h2 className="heading-m">{caseStudyLabels.sections.overview}</h2>
               <p className="max-w-[62ch] text-base leading-[1.6] text-[var(--ink-muted)] md:text-[1.0625rem]">
                 {project.overview}
@@ -170,7 +200,10 @@ export default async function ProjectCaseStudyPage({
             </section>
 
             {project.challenge && (
-              <section id="challenge" className="space-y-3 border-t border-[var(--rule)] pt-8">
+              <section
+                id="challenge"
+                className="space-y-3 scroll-mt-24 border-t border-[var(--rule)] pt-8"
+              >
                 <h2 className="heading-m">{caseStudyLabels.sections.challenge}</h2>
                 <p className="max-w-[62ch] text-base leading-[1.6] text-[var(--ink-muted)] md:text-[1.0625rem]">
                   {project.challenge}
@@ -178,38 +211,25 @@ export default async function ProjectCaseStudyPage({
               </section>
             )}
 
-            <section id="approach" className="space-y-3 border-t border-[var(--rule)] pt-8">
+            <section
+              id="approach"
+              className="space-y-3 scroll-mt-24 border-t border-[var(--rule)] pt-8"
+            >
               <h2 className="heading-m">{caseStudyLabels.sections.approach}</h2>
               <p className="max-w-[62ch] text-base leading-[1.6] text-[var(--ink-muted)] md:text-[1.0625rem]">
                 {project.approach}
               </p>
             </section>
 
-            <section id="outcome" className="space-y-3 border-t border-[var(--rule)] pt-8">
+            <section
+              id="outcome"
+              className="space-y-3 scroll-mt-24 border-t border-[var(--rule)] pt-8"
+            >
               <h2 className="heading-m">{caseStudyLabels.sections.outcome}</h2>
               <p className="max-w-[62ch] text-base leading-[1.6] text-[var(--ink-muted)] md:text-[1.0625rem]">
                 {project.outcome}
               </p>
             </section>
-
-            {project.gallery.length > 0 && (
-              <div className="space-y-8 border-t border-[var(--rule)] pt-8">
-                {project.gallery.map((imgBase, i) => (
-                  <div
-                    key={imgBase}
-                    className="aspect-[4/3] w-full overflow-hidden bg-[var(--rule)]"
-                  >
-                    <ProjectImage
-                      base={imgBase}
-                      alt={`${project.title} gallery image ${i + 1}`}
-                      sizes="(max-width: 1023px) 95vw, 60vw"
-                      width={1600}
-                      height={1200}
-                    />
-                  </div>
-                ))}
-              </div>
-            )}
           </div>
         </div>
       </div>
