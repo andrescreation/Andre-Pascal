@@ -24,12 +24,18 @@ test.describe("case studies", () => {
     }
   });
 
-  test("gallery images render side by side above Overview on desktop", async ({
+  test("gallery images render side by side above Overview on desktop and swap into 4:3 main banner on click", async ({
     page,
     isMobile,
   }) => {
     test.skip(Boolean(isMobile), "Desktop side-by-side gallery layout test");
     await page.goto("/projects/supashop");
+
+    const mainBanner = page.getByTestId("case-study-main-banner");
+    const mainBox = await mainBanner.boundingBox();
+    expect(mainBox).not.toBeNull();
+    // Main banner is 4:3 (aspect ratio ~ 1.333)
+    expect(mainBox!.width / mainBox!.height).toBeCloseTo(4 / 3, 1);
 
     const items = page.getByTestId("case-study-gallery-item");
     await expect(items).toHaveCount(2);
@@ -48,6 +54,12 @@ test.describe("case studies", () => {
 
     // Gallery appears above the Overview section
     expect(box0!.y).toBeLessThan(overviewBox!.y);
+
+    // Clicking first gallery card swaps its image into the main 4:3 banner
+    const mainImg = mainBanner.locator("img");
+    await expect(mainImg).toHaveAttribute("src", /\/images\/projects\/supashop\/cover/);
+    await items.nth(0).click();
+    await expect(mainImg).toHaveAttribute("src", /\/images\/projects\/supashop\/checkout/);
   });
 
   test("draft project slugs return 404", async ({ page }) => {
