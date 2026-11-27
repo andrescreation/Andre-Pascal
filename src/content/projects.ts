@@ -21,11 +21,7 @@ const rawProjects: Project[] = [
     outcome:
       "The product launched and is live. The design gave Pepsa a calm, trustworthy interface that works as well on a budget Android phone as on desktop.",
     cover: "/images/projects/pepsa/cover",
-    gallery: [
-      "/images/projects/pepsa/onboarding",
-      "/images/projects/pepsa/dashboard",
-      "/images/projects/pepsa/transactions",
-    ],
+    gallery: ["/images/projects/pepsa/dashboard"],
     marqueeRow: 1,
     order: 1,
     draft: false,
@@ -48,10 +44,7 @@ const rawProjects: Project[] = [
     // TODO: [ANDRE: add a real metric for MySounds Global if you have one]
     outcome: "The product went live with a consistent visual system the team could keep extending.",
     cover: "/images/projects/mysounds-global/cover",
-    gallery: [
-      "/images/projects/mysounds-global/onboarding",
-      "/images/projects/mysounds-global/storefront",
-    ],
+    gallery: ["/images/projects/mysounds-global/storefront"],
     marqueeRow: 1,
     order: 2,
     draft: false,
@@ -74,7 +67,7 @@ const rawProjects: Project[] = [
     outcome:
       "The redesigned UI and marketing visuals helped drive about a 40% increase in user engagement.",
     cover: "/images/projects/supashop/cover",
-    gallery: ["/images/projects/supashop/checkout", "/images/projects/supashop/catalogue"],
+    gallery: ["/images/projects/supashop/catalogue"],
     marqueeRow: 1,
     order: 3,
     draft: false,
@@ -96,7 +89,7 @@ const rawProjects: Project[] = [
     outcome:
       "A trading experience that feels calm and readable, sharing one design language with the other Supa products.",
     cover: "/images/projects/supadex/cover",
-    gallery: [],
+    gallery: ["/images/projects/supadex/detail"],
     marqueeRow: 1,
     order: 4,
     draft: false,
@@ -121,7 +114,7 @@ const rawProjects: Project[] = [
     // TODO: [ANDRE: add final Lighthouse scores after launch]
     outcome: "Zero backend, zero database, nothing to hack or wipe.",
     cover: "/images/projects/andre-creations-portfolio/cover",
-    gallery: [],
+    gallery: ["/images/projects/andre-creations-portfolio/detail"],
     marqueeRow: 1,
     order: 5,
     draft: false,
@@ -144,7 +137,7 @@ const rawProjects: Project[] = [
     outcome:
       "A cleaner, more approachable governance experience, consistent with the rest of the Supa suite.",
     cover: "/images/projects/supadao/cover",
-    gallery: [],
+    gallery: ["/images/projects/supadao/detail"],
     marqueeRow: 2,
     order: 6,
     draft: false,
@@ -166,10 +159,7 @@ const rawProjects: Project[] = [
     outcome:
       "Design to development work became about 30% more efficient, and the four products finally looked and felt like one company.",
     cover: "/images/projects/supacore-design-system/cover",
-    gallery: [
-      "/images/projects/supacore-design-system/tokens",
-      "/images/projects/supacore-design-system/components",
-    ],
+    gallery: ["/images/projects/supacore-design-system/components"],
     marqueeRow: 2,
     order: 7,
     draft: false,
@@ -191,10 +181,7 @@ const rawProjects: Project[] = [
     outcome:
       "Stronger shelf presence and a consistent brand across channels, with creative turnaround time cut by about 20%.",
     cover: "/images/projects/apus-industries/cover",
-    gallery: [
-      "/images/projects/apus-industries/packaging",
-      "/images/projects/apus-industries/social",
-    ],
+    gallery: ["/images/projects/apus-industries/packaging"],
     marqueeRow: 2,
     order: 8,
     draft: false,
@@ -217,7 +204,7 @@ const rawProjects: Project[] = [
     outcome:
       "A consistent visual language across every customer touchpoint, through the rename from Gossipears to Amyola.",
     cover: "/images/projects/amyola/cover",
-    gallery: [],
+    gallery: ["/images/projects/amyola/detail"],
     marqueeRow: 2,
     order: 9,
     draft: false,
@@ -238,7 +225,7 @@ const rawProjects: Project[] = [
     outcome:
       "Key workflows became simpler, contributing to about a 25% improvement in app usability.",
     cover: "/images/projects/trenztech/cover",
-    gallery: [],
+    gallery: ["/images/projects/trenztech/detail"],
     marqueeRow: 2,
     order: 10,
     draft: true,

@@ -20,25 +20,20 @@ export function CaseStudyArticle({
   project: Project;
   nextProject: Project;
 }) {
-  const [mainMedia, setMainMedia] = useState<MediaSlot>({
-    base: project.cover,
-    alt: `${project.title} cover image`,
-  });
+  const secondImageBase = project.gallery[0] ?? project.cover;
+  const mediaPair: [MediaSlot, MediaSlot] = [
+    {
+      base: project.cover,
+      alt: `${project.title} cover image`,
+    },
+    {
+      base: secondImageBase,
+      alt: `${project.title} detail image`,
+    },
+  ];
 
-  const [galleryMedia, setGalleryMedia] = useState<MediaSlot[]>(() =>
-    project.gallery.map((imgBase, i) => ({
-      base: imgBase,
-      alt: `${project.title} gallery image ${i + 1}`,
-    })),
-  );
-
-  function handleSwapWithMain(index: number) {
-    const selected = galleryMedia[index];
-    if (!selected) return;
-    const previousMain = mainMedia;
-    setMainMedia(selected);
-    setGalleryMedia((prev) => prev.map((item, idx) => (idx === index ? previousMain : item)));
-  }
+  const [activeIndex, setActiveIndex] = useState<0 | 1>(0);
+  const mainMedia = mediaPair[activeIndex];
 
   return (
     <article className="pt-24 md:pt-28">
@@ -151,21 +146,21 @@ export function CaseStudyArticle({
           </aside>
 
           <div className="lg:col-span-8 space-y-12">
-            {galleryMedia.length > 0 && (
-              <div
-                data-testid="case-study-gallery"
-                className={`grid grid-cols-1 gap-6 ${
-                  galleryMedia.length === 3 ? "md:grid-cols-3" : "md:grid-cols-2"
-                }`}
-              >
-                {galleryMedia.map((slot, i) => (
+            <div data-testid="case-study-gallery" className="grid grid-cols-1 gap-6 md:grid-cols-2">
+              {mediaPair.map((slot, i) => {
+                const idx = (i === 0 ? 0 : 1) as 0 | 1;
+                const isSelected = activeIndex === idx;
+                return (
                   <button
                     key={`${slot.base}-${i}`}
                     type="button"
                     data-testid="case-study-gallery-item"
-                    onClick={() => handleSwapWithMain(i)}
+                    aria-pressed={isSelected}
+                    onClick={() => setActiveIndex(idx)}
                     aria-label={`Display ${slot.alt} in main banner`}
-                    className="group relative aspect-[4/3] w-full overflow-hidden bg-[var(--rule)] cursor-pointer text-left focus-visible:outline-2 focus-visible:outline-[var(--accent)]"
+                    className={`group relative aspect-[4/3] w-full overflow-hidden bg-[var(--rule)] cursor-pointer text-left transition-all focus-visible:outline-2 focus-visible:outline-[var(--accent)] ${
+                      isSelected ? "ring-2 ring-[var(--accent)]" : "opacity-85 hover:opacity-100"
+                    }`}
                   >
                     <ProjectImage
                       base={slot.base}
@@ -176,15 +171,13 @@ export function CaseStudyArticle({
                       className="transition-transform duration-300 ease-out group-hover:scale-[1.03]"
                     />
                   </button>
-                ))}
-              </div>
-            )}
+                );
+              })}
+            </div>
 
             <section
               id="overview"
-              className={`space-y-3 scroll-mt-24 ${
-                galleryMedia.length > 0 ? "border-t border-[var(--rule)] pt-8" : ""
-              }`}
+              className="space-y-3 scroll-mt-24 border-t border-[var(--rule)] pt-8"
             >
               <h2 className="heading-m">{caseStudyLabels.sections.overview}</h2>
               <p className="max-w-[62ch] text-base leading-[1.6] text-[var(--ink-muted)] md:text-[1.0625rem]">

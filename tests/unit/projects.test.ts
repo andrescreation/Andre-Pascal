@@ -29,6 +29,7 @@ describe("projects content", () => {
       expect(p.approach.length).toBeGreaterThan(0);
       expect(p.outcome.length).toBeGreaterThan(0);
       expect([1, 2]).toContain(p.marqueeRow);
+      expect(p.gallery.length, `${p.slug} must have exactly 1 secondary image`).toBe(1);
 
       for (const base of [p.cover, ...p.gallery]) {
         const cardPath = path.join(PUBLIC_DIR, `${base}-card.webp`);
