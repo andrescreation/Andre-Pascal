@@ -6,9 +6,9 @@
     "node": ">=22.12.0"
   },
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "dev": "node init && next dev",
+    "build": "node init && next build",
+    "start": "node init && next start",
     "img": "node scripts/optimize-images.mjs",
     "img:strict": "node scripts/optimize-images.mjs --strict",
     "lint": "eslint . && prettier --check .",

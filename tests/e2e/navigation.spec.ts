@@ -23,6 +23,36 @@ test.describe("navigation", () => {
     }
   });
 
+  test("navbar active dot moves to About on scroll down and returns to Home when scrolling back to Hero", async ({
+    page,
+    isMobile,
+  }) => {
+    test.skip(Boolean(isMobile), "Desktop primary nav active dot test");
+    await page.goto("/");
+    const nav = page.getByTestId("navbar").getByRole("navigation", { name: "Primary" });
+    const homeLink = nav.getByRole("link", { name: "Home" });
+    const aboutLink = nav.getByRole("link", { name: "About" });
+
+    await expect(homeLink).toHaveAttribute("aria-current", "page");
+
+    // Scroll into About section
+    await page.evaluate(() => {
+      const about = document.getElementById("about");
+      if (about) {
+        window.scrollTo(0, window.scrollY + about.getBoundingClientRect().top - 60);
+      }
+    });
+    await page.waitForTimeout(300);
+    await expect(aboutLink).toHaveAttribute("aria-current", "page");
+    await expect(homeLink).not.toHaveAttribute("aria-current", "page");
+
+    // Scroll back up to Hero section -> active dot returns to Home
+    await page.evaluate(() => window.scrollTo(0, 0));
+    await page.waitForTimeout(300);
+    await expect(homeLink).toHaveAttribute("aria-current", "page");
+    await expect(aboutLink).not.toHaveAttribute("aria-current", "page");
+  });
+
   test("mobile menu opens, traps focus, closes on Escape and link click", async ({
     page,
     isMobile,
