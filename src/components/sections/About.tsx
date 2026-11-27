@@ -11,6 +11,7 @@ export function About() {
   const sectionRef = useRef<HTMLElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const headingLinesRef = useRef<(HTMLSpanElement | null)[]>([]);
+  const activeIndexRef = useRef(0);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isMobileOrReduced, setIsMobileOrReduced] = useState(true);
 
@@ -142,26 +143,13 @@ export function About() {
         // 3. Pin About for 5 cards x 60vh = 300vh and cycle the card deck
         const cards = cardRefs.current.filter(Boolean) as HTMLDivElement[];
         const total = cards.length;
-        if (total === 5) {
-          const updateStackPositions = (progress: number) => {
-            const stepFloat = progress * 5;
-            const active = Math.min(4, Math.floor(stepFloat));
-            setActiveIndex(active);
+        let stopAutoplay: (() => void) | undefined;
 
+        if (total === 5) {
+          const renderDeckTransition = (active: number, localT: number) => {
             cards.forEach((card, i) => {
-              if (i < active) {
-                // Already cycled behind
-                gsap.set(card, {
-                  xPercent: 0,
-                  yPercent: 0,
-                  y: 28,
-                  scale: 0.92,
-                  rotation: 0,
-                  zIndex: 1,
-                  opacity: 0,
-                });
-              } else if (i === active) {
-                const localT = active < 4 ? stepFloat - active : 0;
+              const slot = (i - active + total) % total;
+              if (slot === 0) {
                 gsap.set(card, {
                   xPercent: localT * -115,
                   yPercent: 0,
@@ -172,8 +160,6 @@ export function About() {
                   opacity: Math.max(0.2, 1 - localT * 0.45),
                 });
               } else {
-                const slot = i - active;
-                const localT = active < 4 ? stepFloat - active : 0;
                 const effectiveSlot = slot - localT;
                 const yOffset = Math.max(0, effectiveSlot) * 14;
                 const scaleVal = 1 - Math.max(0, effectiveSlot) * 0.04;
@@ -184,10 +170,91 @@ export function About() {
                   scale: Math.max(0.92, scaleVal),
                   rotation: 0,
                   zIndex: 10 - slot,
-                  opacity: slot <= 2 ? 1 : Math.max(0, 1 - (slot - 2 - localT)),
+                  opacity: effectiveSlot <= 2 ? 1 : Math.max(0, 1 - (effectiveSlot - 2)),
                 });
               }
             });
+          };
+
+          const updateStackPositions = (progress: number) => {
+            const stepFloat = progress * 5;
+            const active = Math.min(4, Math.floor(stepFloat));
+            const localT = active < 4 ? stepFloat - active : 0;
+            activeIndexRef.current = active;
+            setActiveIndex(active);
+            renderDeckTransition(active, localT);
+          };
+
+          let idleTimer: number | undefined;
+          let autoplayTimer: number | undefined;
+          let activeTween: gsap.core.Tween | undefined;
+
+          const clearAutoplayTimers = () => {
+            if (idleTimer !== undefined) {
+              window.clearTimeout(idleTimer);
+              idleTimer = undefined;
+            }
+            if (autoplayTimer !== undefined) {
+              window.clearInterval(autoplayTimer);
+              autoplayTimer = undefined;
+            }
+            if (activeTween) {
+              activeTween.kill();
+              activeTween = undefined;
+            }
+          };
+
+          const isAboutInReadingView = () => {
+            const rect = sectionEl.getBoundingClientRect();
+            return (
+              rect.top <= window.innerHeight * 0.45 && rect.bottom >= window.innerHeight * 0.45
+            );
+          };
+
+          const stepAutoplayCard = () => {
+            if (!isAboutInReadingView()) {
+              clearAutoplayTimers();
+              return;
+            }
+            const fromIndex = activeIndexRef.current;
+            const toIndex = (fromIndex + 1) % total;
+            const proxy = { t: 0 };
+            if (activeTween) activeTween.kill();
+            activeTween = gsap.to(proxy, {
+              t: 1,
+              duration: 0.65,
+              ease: "power2.inOut",
+              onUpdate: () => {
+                renderDeckTransition(fromIndex, proxy.t);
+              },
+              onComplete: () => {
+                activeIndexRef.current = toIndex;
+                setActiveIndex(toIndex);
+                renderDeckTransition(toIndex, 0);
+                activeTween = undefined;
+              },
+            });
+          };
+
+          const scheduleIdleAutoplay = () => {
+            clearAutoplayTimers();
+            idleTimer = window.setTimeout(() => {
+              if (!isAboutInReadingView()) return;
+              stepAutoplayCard();
+              autoplayTimer = window.setInterval(stepAutoplayCard, 2500);
+            }, 1800);
+          };
+
+          const onWindowScroll = () => {
+            scheduleIdleAutoplay();
+          };
+
+          window.addEventListener("scroll", onWindowScroll, { passive: true });
+          scheduleIdleAutoplay();
+
+          stopAutoplay = () => {
+            clearAutoplayTimers();
+            window.removeEventListener("scroll", onWindowScroll);
           };
 
           ScrollTrigger.create({
@@ -197,12 +264,21 @@ export function About() {
             pin: true,
             scrub: 0.5,
             refreshPriority: 10,
-            onUpdate: (self) => updateStackPositions(self.progress),
+            onUpdate: (self) => {
+              if (activeTween) {
+                activeTween.kill();
+                activeTween = undefined;
+              }
+              updateStackPositions(self.progress);
+            },
           });
         }
 
         ScrollTrigger.sort();
         ScrollTrigger.refresh();
+        return () => {
+          stopAutoplay?.();
+        };
       });
     }
 

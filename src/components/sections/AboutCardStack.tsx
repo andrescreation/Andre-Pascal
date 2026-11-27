@@ -50,6 +50,68 @@ export function AboutCardStack({
     }
   }
 
+  useEffect(() => {
+    if (!isMobileOrReduced) return;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduced) return;
+
+    let idleTimer: number | undefined;
+    let autoplayTimer: number | undefined;
+
+    const clearTimers = () => {
+      if (idleTimer !== undefined) {
+        window.clearTimeout(idleTimer);
+        idleTimer = undefined;
+      }
+      if (autoplayTimer !== undefined) {
+        window.clearInterval(autoplayTimer);
+        autoplayTimer = undefined;
+      }
+    };
+
+    const isAboutVisible = () => {
+      const aboutEl = document.getElementById("about");
+      if (!aboutEl) return false;
+      const rect = aboutEl.getBoundingClientRect();
+      return rect.top <= window.innerHeight * 0.55 && rect.bottom >= window.innerHeight * 0.35;
+    };
+
+    const advanceCarousel = () => {
+      if (!isAboutVisible()) {
+        clearTimers();
+        return;
+      }
+      setLoadFullImages(true);
+      setMobileIndex((prev) => {
+        const next = (prev + 1) % cards.length;
+        trackRef.current?.scrollTo({
+          left: next * (trackRef.current?.clientWidth ?? 0),
+          behavior: "smooth",
+        });
+        return next;
+      });
+    };
+
+    const scheduleIdle = () => {
+      clearTimers();
+      idleTimer = window.setTimeout(() => {
+        if (!isAboutVisible()) return;
+        advanceCarousel();
+        autoplayTimer = window.setInterval(advanceCarousel, 2500);
+      }, 1800);
+    };
+
+    window.addEventListener("scroll", scheduleIdle, { passive: true });
+    window.addEventListener("touchstart", scheduleIdle, { passive: true });
+    scheduleIdle();
+
+    return () => {
+      clearTimers();
+      window.removeEventListener("scroll", scheduleIdle);
+      window.removeEventListener("touchstart", scheduleIdle);
+    };
+  }, [cards.length, isMobileOrReduced]);
+
   function handleScroll() {
     if (!trackRef.current) return;
     const { scrollLeft, clientWidth } = trackRef.current;

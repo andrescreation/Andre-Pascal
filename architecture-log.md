@@ -85,3 +85,7 @@
 - Updated `scripts/optimize-images.mjs` so `images-raw/hero-poster.*` also writes `public/images/hero-poster.webp` alongside `-card.webp`, `-full.webp`, and `src/content/blur.json`.
 - Updated descriptive `alt` text in `src/content/about.ts` (all 5 About story cards plus `/about` 6th card `Always Learning, Always Shipping` at `/images/about/06-learning-shipping`), `src/content/skills.ts`, and `src/content/hero.ts`.
 - Updated `src/components/sections/HeroVideo.tsx` and `tests/e2e/hero.spec.ts` so vertical/portrait phone screens (`< 600px` in portrait orientation) never render the hero video (poster only), while landscape mobile screens, tablets/iPads (portrait and landscape), and desktop/large screens render and play the hero video with live orientation-change listeners.
+
+## About Section Idle Card Autoplay & Navbar Home Active Dot Reset (2026-11-27)
+- Updated `src/components/sections/About.tsx` and `src/components/sections/AboutCardStack.tsx` so that when the reader stops scrolling in the `#about` section (`1.8s` idle threshold), the 5 story cards automatically cycle using a circular deck transition every `2.5s` while immediately yielding back to scroll control when scrolling resumes (and respecting `prefers-reduced-motion: reduce`).
+- Updated `src/components/layout/Navbar.tsx` to track live scroll positions across `#hero` and downstream sections (`#about`, `#skills`, `#work`, `#experience`, `#contact`), ensuring the blue active indicator dot (`aria-current="page"`) returns to `Home` whenever the user scrolls back up into the Hero section.

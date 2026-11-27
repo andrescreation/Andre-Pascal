@@ -10,7 +10,7 @@ import { CvMenu } from "./CvMenu";
 import { MobileMenu } from "./MobileMenu";
 import { ThemeToggle } from "./ThemeToggle";
 
-const SECTION_IDS = ["work", "about", "skills", "experience", "contact"] as const;
+const SECTION_IDS = ["about", "skills", "work", "experience", "contact"] as const;
 
 export function Navbar() {
   const pathname = usePathname();
@@ -47,27 +47,34 @@ export function Navbar() {
       return;
     }
 
-    const observers: IntersectionObserver[] = [];
+    function updateActiveSection() {
+      if (window.scrollY < window.innerHeight * 0.35) {
+        setActiveSection("");
+        return;
+      }
 
-    const sectionObserver = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
+      const triggerY = window.innerHeight * 0.45;
+      let current = "";
+
+      for (const id of SECTION_IDS) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= triggerY) {
+          current = id;
         }
-      },
-      { rootMargin: "-40% 0px -45% 0px", threshold: 0 },
-    );
+      }
 
-    for (const id of SECTION_IDS) {
-      const el = document.getElementById(id);
-      if (el) sectionObserver.observe(el);
+      setActiveSection(current);
     }
-    observers.push(sectionObserver);
+
+    updateActiveSection();
+    window.addEventListener("scroll", updateActiveSection, { passive: true });
+    window.addEventListener("resize", updateActiveSection, { passive: true });
 
     return () => {
-      for (const obs of observers) obs.disconnect();
+      window.removeEventListener("scroll", updateActiveSection);
+      window.removeEventListener("resize", updateActiveSection);
     };
   }, [isHome, pathname]);
 
@@ -115,6 +122,7 @@ export function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
+                  aria-current={isActive ? "page" : undefined}
                   className="relative inline-flex min-h-[44px] items-center whitespace-nowrap text-[0.9375rem] font-medium transition-colors duration-200 hover:text-[var(--accent)]"
                 >
                   <span>{link.label}</span>

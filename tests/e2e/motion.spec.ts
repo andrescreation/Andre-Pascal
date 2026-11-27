@@ -61,6 +61,13 @@ test.describe("motion", () => {
       await expect(page.getByTestId("about-counter")).toHaveText(`0${step + 1} / 05`);
       await expect(page.getByTestId("about-caption")).toHaveText(aboutContent.cards[step].caption);
     }
+
+    // Stop scrolling on About section: cards autoplay after idle delay
+    await page.evaluate((y) => window.scrollTo(0, y + 10), pinStartY);
+    await page.waitForTimeout(300);
+    await expect(page.getByTestId("about-counter")).toHaveText("01 / 05");
+    await page.waitForTimeout(2700);
+    await expect(page.getByTestId("about-counter")).not.toHaveText("01 / 05");
   });
 
   test("reduced motion renders swipeable carousel instead of pinned stack", async ({
